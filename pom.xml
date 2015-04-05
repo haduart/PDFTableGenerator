@@ -3,11 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>pdftablesample</groupId>
-    <artifactId>paginated-pdfbox-table</artifactId>
+    <groupId>com.haduart.pdftablegenerator</groupId>
+    <artifactId>PDFTableGenerator</artifactId>
 
     <version>1.0.0-SNAPSHOT</version>
-    <name>Paginated PDFBox Table Sample</name>
+    <name>Paginated PDFBox Table Generator</name>
     <packaging>jar</packaging>
 
     <properties>
@@ -21,35 +21,24 @@
             <artifactId>pdfbox</artifactId>
             <version>${pdfbox.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.9.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.4</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <executable>java</executable>
-                    <workingDirectory>${project.build.directory}/exec-working-directory</workingDirectory>
-                    <arguments>
-                        <!-- automatically creates the classpath using all project dependencies,
-                  also adding the project build directory -->
-                        <argument>-classpath</argument>
-                        <classpath>
-                        </classpath>
-                        <argument>pdftablesample.PDFSample</argument>
-                    </arguments>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
 

@@ -1,4 +1,4 @@
-package pdftablesample;
+package com.haduart.pdftablegenerator.structure;
 
 public class Column {
 

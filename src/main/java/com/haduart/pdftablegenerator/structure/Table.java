@@ -1,6 +1,6 @@
-package pdftablesample;
+package com.haduart.pdftablegenerator.structure;
 
-import java.util.List;
+import java.util.*;
 
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
@@ -22,6 +22,7 @@ public class Table {
     private Integer numberOfRows;
     private List<Column> columns;
     private String[][] content;
+    private SortedMap<Integer, LinkedList> dynamicContent;
     private float cellMargin;
 
     public Table() {
@@ -71,12 +72,21 @@ public class Table {
         this.fontSize = fontSize;
     }
 
-    public String[] getColumnsNamesAsArray() {
-        String[] columnNames = new String[getNumberOfColumns()];
-        for (int i = 0; i < getNumberOfColumns() - 1; i++) {
-            columnNames[i] = columns.get(i).getName();
-        }
+    public LinkedList<String> getColumnsNamesAsArray() {
+        LinkedList<String> columnNames = new LinkedList<String>();
+        Iterator<Column> iter = columns.iterator();
+        while (iter.hasNext())
+            columnNames.add(iter.next().getName());
+
         return columnNames;
+    }
+
+    public SortedMap<Integer, LinkedList> getDynamicContent() {
+        return dynamicContent;
+    }
+
+    public void setDynamicContent(SortedMap<Integer, LinkedList> dynamicContent) {
+        this.dynamicContent = dynamicContent;
     }
 
     public List<Column> getColumns() {
@@ -109,14 +119,6 @@ public class Table {
 
     public void setRowHeight(float rowHeight) {
         this.rowHeight = rowHeight;
-    }
-
-    public String[][] getContent() {
-        return content;
-    }
-
-    public void setContent(String[][] content) {
-        this.content = content;
     }
 
     public float getCellMargin() {

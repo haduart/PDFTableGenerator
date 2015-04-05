@@ -1,6 +1,9 @@
-package pdftablesample;
+package com.haduart.pdftablegenerator.structure;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.SortedMap;
 
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
@@ -21,11 +24,6 @@ public class TableBuilder {
 
     public TableBuilder setRowHeight(float rowHeight) {
         table.setRowHeight(rowHeight);
-        return this;
-    }
-
-    public TableBuilder setContent(String[][] content) {
-        table.setContent(content);
         return this;
     }
 
@@ -61,6 +59,11 @@ public class TableBuilder {
 
     public TableBuilder setFontSize(float fontSize) {
         table.setFontSize(fontSize);
+        return this;
+    }
+
+    public TableBuilder setDynamicContent(SortedMap<Integer, LinkedList> dynamicContent) {
+        table.setDynamicContent(dynamicContent);
         return this;
     }
 
