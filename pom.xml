@@ -6,7 +6,7 @@
 
     <groupId>com.haduart.pdftablegenerator</groupId>
     <artifactId>PDFTableGenerator</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-2</version>
     <name>Paginated PDFBox Table Generator</name>
     <packaging>jar</packaging>
 

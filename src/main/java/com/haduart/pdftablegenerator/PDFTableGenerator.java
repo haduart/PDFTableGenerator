@@ -1,14 +1,12 @@
 package com.haduart.pdftablegenerator;
 
 import com.haduart.pdftablegenerator.structure.Table;
-import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.SortedMap;
 
@@ -17,17 +15,23 @@ public class PDFTableGenerator {
     public static final boolean APPEND_CONTENT = false;
     public static final boolean COMPRESS = false;
 
-    public ByteArrayOutputStream generatePDF(Table table) throws IOException, COSVisitorException {
+    public ByteArrayOutputStream generatePDF(Table table) throws PDFTableGeneratorSavingException {
         ByteArrayOutputStream pdfOutputStream = new ByteArrayOutputStream();
         PDDocument doc = null;
         try {
-            doc = new PDDocument();
-            drawTable(doc, table);
-            doc.save(pdfOutputStream);
-        } finally {
-            if (doc != null) {
-                doc.close();
+            try {
+                doc = new PDDocument();
+                drawTable(doc, table);
+                doc.save(pdfOutputStream);
+            } catch (Exception e) {
+                throw new PDFTableGeneratorSavingException(e);
+            } finally {
+                if (doc != null) {
+                    doc.close();
+                }
             }
+        } catch (IOException e) {
+            throw new PDFTableGeneratorSavingException(e);
         }
         return pdfOutputStream;
     }
@@ -138,4 +142,11 @@ public class PDFTableGenerator {
             contentStream.concatenate2CTM(0, 1, -1, 0, table.getPageSize().getWidth(), 0);
         return contentStream;
     }
+
+    private class PDFTableGeneratorSavingException extends RuntimeException {
+        public PDFTableGeneratorSavingException(Throwable e) {
+            super(e);
+        }
+    }
+
 }
