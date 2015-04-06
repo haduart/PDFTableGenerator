@@ -16,9 +16,7 @@ import java.util.*;
 
 import static org.junit.Assert.assertFalse;
 
-/**
- * Created by haduart on 05/04/15.
- */
+
 public class PDFTableGeneratorTest {
     // Page configuration
     private static final PDRectangle PAGE_SIZE = PDPage.PAGE_SIZE_A3;
@@ -32,15 +30,6 @@ public class PDFTableGeneratorTest {
     // Table configuration
     private static final float ROW_HEIGHT = 15;
     private static final float CELL_MARGIN = 2;
-
-    @Test
-    public void generatePDFTest() throws Exception {
-        ByteArrayOutputStream baos = new PDFTableGenerator().generatePDF(createContent());
-        byte[] writtenBytes = baos.toByteArray();
-        assertFalse(writtenBytes.length == 0);
-        FileUtils.writeByteArrayToFile(new File("/Users/haduart/Documents/PDFProjects/Paginated-PDFBox-Table-Sample/edu777.pdf"),
-                writtenBytes);
-    }
 
     private static Table createContent() {
         // Total size of columns must not be greater than table width.
@@ -58,12 +47,10 @@ public class PDFTableGeneratorTest {
 
         SortedMap<Integer, LinkedList> dynamicContent = new TreeMap<Integer, LinkedList>();
 
-        dynamicContent.put(1, generateRow("FirstName-1", "LastName-1", "fakemail@mock.com-1", "12345", "yes", "XH4234FSD", "4334", "yFone 5 XS", "31/05/2013 07:15 am", "WEB"));
-        dynamicContent.put(2, generateRow("FirstName-2", "LastName-2", "fakemail@mock.com-2", "12345", "yes", "XH4234FSD", "4334", "yFone 5 XS", "31/05/2013 07:15 am", "WEB"));
-        dynamicContent.put(3, generateRow("FirstName-3", "LastName-3", "fakemail@mock.com-3", "12345", "yes", "XH4234FSD", "4334", "yFone 5 XS", "31/05/2013 07:15 am", "WEB"));
-        dynamicContent.put(4, generateRow("FirstName-4", "LastName-4", "fakemail@mock.com-4", "12345", "yes", "XH4234FSD", "4334", "yFone 5 XS", "31/05/2013 07:15 am", "WEB"));
-        dynamicContent.put(5, generateRow("FirstName-5", "LastName-5", "fakemail@mock.com-5", "12345", "yes", "XH4234FSD", "4334", "yFone 5 XS", "31/05/2013 07:15 am", "WEB"));
-        dynamicContent.put(6, generateRow("FirstName-6", "LastName-6", "fakemail@mock.com-6", "12345", "yes", "XH4234FSD", "4334", "yFone 5 XS", "31/05/2013 07:15 am", "WEB"));
+        for (int i = 1; i < 150; i++) {
+            dynamicContent.put(i, generateRow(
+                    "FirstName-" + i, "LastName-" + i, "fakemail@mock.com-" + i, "12345", "yes", "XH4234FSD", "4334", "yFone 5 XS", "31/05/2013 07:15 am", "WEB"));
+        }
 
         float tableHeight = IS_LANDSCAPE ? PAGE_SIZE.getWidth() - (2 * MARGIN) : PAGE_SIZE.getHeight() - (2 * MARGIN);
 
@@ -88,6 +75,15 @@ public class PDFTableGeneratorTest {
         for (String row : rows)
             linkedList.add(row);
         return linkedList;
+    }
+
+    @Test
+    public void generatePDFTest() throws Exception {
+        ByteArrayOutputStream baos = new PDFTableGenerator().generatePDF(createContent());
+        byte[] writtenBytes = baos.toByteArray();
+        assertFalse(writtenBytes.length == 0);
+        FileUtils.writeByteArrayToFile(new File("/Users/haduart/Documents/PDFProjects/Paginated-PDFBox-Table-Sample/edu777.pdf"),
+                writtenBytes);
     }
 
 }
