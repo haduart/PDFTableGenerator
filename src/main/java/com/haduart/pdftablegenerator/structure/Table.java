@@ -8,6 +8,7 @@ import org.apache.pdfbox.pdmodel.font.PDFont;
 public class Table {
 
     // Table attributes
+    private String title = null;
     private float margin;
     private float height;
     private PDRectangle pageSize;
@@ -21,7 +22,6 @@ public class Table {
     // Content attributes
     private Integer numberOfRows;
     private List<Column> columns;
-    private String[][] content;
     private SortedMap<Integer, LinkedList> dynamicContent;
     private float cellMargin;
 
@@ -135,5 +135,13 @@ public class Table {
 
     public void setLandscape(boolean isLandscape) {
         this.isLandscape = isLandscape;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
