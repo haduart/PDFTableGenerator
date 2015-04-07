@@ -3,12 +3,9 @@ package com.haduart.pdftablegenerator;
 import com.haduart.pdftablegenerator.structure.Table;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDFont;
-import org.apache.pdfbox.pdmodel.font.PDType0Font;
+import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.SortedMap;
@@ -23,11 +20,11 @@ public class PDFTableGenerator {
         try {
             try {
                 doc = new PDDocument();
-                if (table.getTextFont() == null) {
-                    String dir = "/usr/share/fonts/msttcorefonts/";
-                    PDFont font = PDType0Font.load(doc, new File(dir + "verdana.ttf"));
-                    table.setTextFont(font);
-                }
+//                if (table.getTextFont() == null) {
+//                    String dir = "/usr/share/fonts/msttcorefonts/";
+//                    PDFont font = PDType0Font.load(doc, new File(dir + "verdana.ttf"));
+//                    table.setTextFont(font);
+//                }
 
                 drawTable(doc, table);
                 doc.save(pdfOutputStream);

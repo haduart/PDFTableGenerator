@@ -4,6 +4,7 @@ import com.haduart.pdftablegenerator.structure.Column;
 import com.haduart.pdftablegenerator.structure.Table;
 import com.haduart.pdftablegenerator.structure.TableBuilder;
 import org.apache.commons.io.FileUtils;
+import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
@@ -18,7 +19,7 @@ import static org.junit.Assert.assertFalse;
 
 public class PDFTableGeneratorTest {
     // Page configuration
-    private static final PDRectangle PAGE_SIZE = PDRectangle.A3;
+    private static final PDRectangle PAGE_SIZE = PDPage.PAGE_SIZE_A3;
     private static final float MARGIN = 20;
     private static final boolean IS_LANDSCAPE = true;
 
@@ -46,10 +47,10 @@ public class PDFTableGeneratorTest {
 
         SortedMap<Integer, LinkedList> dynamicContent = new TreeMap<Integer, LinkedList>();
 
-//        for (int i = 1; i < 10; i++) {
-//            dynamicContent.put(i, generateRow(
-//                    "FirstName-" + i, "LastName-" + i, "fakemail@mock.com-" + i, "12345", "yes", "XH4234FSD", "4334", "yFone 5 XS", "31/05/2013 07:15 am", "WEB"));
-//        }
+        for (int i = 1; i < 150; i++) {
+            dynamicContent.put(i, generateRow(
+                    "FirstName-" + i, "LastName-" + i, "fakemail@mock.com-" + i, "12345", "yes", "XH4234FSD", "4334", "yFone 5 XS", "31/05/2013 07:15 am", "WEB"));
+        }
 
         float tableHeight = IS_LANDSCAPE ? PAGE_SIZE.getWidth() - (2 * MARGIN) : PAGE_SIZE.getHeight() - (2 * MARGIN);
 
