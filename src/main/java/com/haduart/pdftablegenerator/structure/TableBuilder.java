@@ -67,6 +67,11 @@ public class TableBuilder {
         return this;
     }
 
+    public TableBuilder setTile(String title) {
+        table.setTitle(title);
+        return this;
+    }
+
     public Table build() {
         return table;
     }

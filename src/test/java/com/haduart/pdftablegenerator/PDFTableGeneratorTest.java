@@ -55,6 +55,7 @@ public class PDFTableGeneratorTest {
         float tableHeight = IS_LANDSCAPE ? PAGE_SIZE.getWidth() - (2 * MARGIN) : PAGE_SIZE.getHeight() - (2 * MARGIN);
 
         Table table = new TableBuilder()
+                .setTile("New Report!")
                 .setCellMargin(CELL_MARGIN)
                 .setColumns(columns)
                 .setDynamicContent(dynamicContent)
